@@ -7,13 +7,16 @@ import {
     removeTodo as removeTodoActionCreator,
     removeAll as removeAllActionCreator
 } from "../actions/todoAction";
+import {
+  fetchTodosRequested as fetchTodosRequestedActionCreator,
+} from "../actions/fetchTodosAction";
 import addTodoThunkActionCreator from "../thunks/addTodoThunk";
 import TodoApp from "../../components/TodoApp";
 
 // state를 리액트 컴포넌트의 props로 연결시켜주는 역할을 하는 함수 // ownProps는 옵션임
 function mapStateToProps(state) {
   return {
-    todoItems: [...state.todo, ...(state.fetchTodos?.data || [])], // ✅ `fetchTodos`가 없으면 빈 배열 사용
+    todoItems: [...state.todo, ...state.fetchTodos.data],
   };
 }
 
@@ -32,7 +35,10 @@ function mapDispatchToProps(dispatch) {
     },
     triggerAsyncFunction: (asyncFunction) => { // 인자로 비동기 로직이 들어간 함수를 받아서 dispatch해줌
       dispatch(asyncFunction);
-    }
+    },
+    fetchTodo: () => {
+      dispatch(fetchTodosRequestedActionCreator());
+  },
   };
 }
 

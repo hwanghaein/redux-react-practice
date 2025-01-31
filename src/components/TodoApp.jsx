@@ -10,6 +10,7 @@ function TodoApp(props) {
     removeTodo,
     removeAll,
     triggerAsyncFunction,
+    fetchTodo,
   } = props; // props를 통해서 가져올 수 있는 이유는 TodoApp을 리덕스에 connect 시켰기 때문이다.
 
   const [newTodo, setNewTodo] = useState("");
@@ -61,6 +62,12 @@ function TodoApp(props) {
         }}
       >
         비동기 함수 테스트
+      </button>
+
+      <button
+        onClick={fetchTodo}
+      >
+        서버에서 할 일 목록 받아오기
       </button>
     </div>
   );
