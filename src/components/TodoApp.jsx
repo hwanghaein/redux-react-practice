@@ -9,6 +9,7 @@ function TodoApp(props) {
     addTodo,
     removeTodo,
     removeAll,
+    triggerAsyncFunction,
   } = props; // props를 통해서 가져올 수 있는 이유는 TodoApp을 리덕스에 connect 시켰기 때문이다.
 
   const [newTodo, setNewTodo] = useState("");
@@ -41,6 +42,26 @@ function TodoApp(props) {
         <button onClick={removeTodo}>할 일 삭제</button>
         <button onClick={removeAll}>모두 삭제</button>
       </div>
+
+      <button
+        onClick={() => {
+          triggerAsyncFunction((dispatch, getState) => {
+            console.log(`비동기 함수 실행`, getState());
+
+            new Promise((resolve) => {
+              setTimeout(resolve, 3000);
+            })
+              .then(() => {
+                console.log(`비동기 함수 성공`, getState());
+              })
+              .finally(() => {
+                console.log(`비동기 함수 종료`, getState());
+              });
+          });
+        }}
+      >
+        비동기 함수 테스트
+      </button>
     </div>
   );
 }
@@ -53,6 +74,5 @@ TodoApp.propTypes = {
   triggerAsyncFunction: PropTypes.func,
   fetchTodo: PropTypes.func,
 };
-
 
 export default TodoApp;

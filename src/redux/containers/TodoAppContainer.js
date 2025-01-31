@@ -1,7 +1,12 @@
 import { connect } from "react-redux";
 
 // import { addTodoActionCreator, removeAllActionCreator, removeTodoActionCreator } from "../actions";
-import { addTodoActionCreator, removeAllActionCreator, removeTodoActionCreator } from "../ducks/todoDock";
+// import { addTodoActionCreator, removeAllActionCreator, removeTodoActionCreator } from "../ducks/todoDock";
+import {
+    addTodo as addTodoActionCreator,
+    removeTodo as removeTodoActionCreator,
+    removeAll as removeAllActionCreator
+} from "../actions/todoAction";
 
 import TodoApp from "../../components/TodoApp";
 
@@ -25,6 +30,9 @@ function mapDispatchToProps(dispatch) {
     removeAll: () => {
       dispatch(removeAllActionCreator());
     },
+    triggerAsyncFunction: (asyncFunction) => { // 인자로 비동기 로직이 들어간 함수를 받아서 dispatch해줌
+      dispatch(asyncFunction);
+    }
   };
 }
 
