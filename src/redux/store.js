@@ -9,10 +9,35 @@ import rootSaga from "./sagas";
 import sessionStorage from 'redux-persist/lib/storage/session';
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
+import createMigrate from "redux-persist/es/createMigrate";
+
+const migrations = {
+  1: (state) => {
+      return {
+          ...state,
+          fetchTodos: {
+              ...state.fetchTodos,
+              extraData: undefined,
+          }
+      };
+  },
+  2: (state) => {
+      return {
+          ...state,
+          fetchTodos: {
+              ...state.fetchTodos,
+              extraData: null,
+          }
+      };
+  },
+}
+
 
 const persistConfig = {
   key: 'root',
   storage: sessionStorage,
+  version: 2,
+    migrate: createMigrate(migrations, { debug: false }),
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
