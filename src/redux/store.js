@@ -5,13 +5,14 @@ import rootReducer from "./reducers";
 import { thunk as thunkMiddleware } from 'redux-thunk';
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas";
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
+import sessionStorage from 'redux-persist/lib/storage/session';
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 
 const persistConfig = {
   key: 'root',
-  storage: storage,
+  storage: sessionStorage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
