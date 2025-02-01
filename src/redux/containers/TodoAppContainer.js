@@ -2,15 +2,20 @@ import { connect } from "react-redux";
 
 // import { addTodoActionCreator, removeAllActionCreator, removeTodoActionCreator } from "../actions";
 // import { addTodoActionCreator, removeAllActionCreator, removeTodoActionCreator } from "../ducks/todoDock";
+// import {
+//     addTodo as addTodoActionCreator,
+//     removeTodo as removeTodoActionCreator,
+//     removeAll as removeAllActionCreator
+// } from "../actions/todoAction";
 import {
-    // addTodo as addTodoActionCreator,
-    removeTodo as removeTodoActionCreator,
-    removeAll as removeAllActionCreator
-} from "../actions/todoAction";
+  addTodo as addTodoActionCreator,
+  removeTodo as removeTodoActionCreator,
+  removeAll as removeAllActionCreator
+} from "../slices/todoSlice";
 import {
   fetchTodosRequested as fetchTodosRequestedActionCreator,
 } from "../actions/fetchTodosAction";
-import addTodoThunkActionCreator from "../thunks/addTodoThunk";
+// import addTodoThunkActionCreator from "../thunks/addTodoThunk";
 import TodoApp from "../../components/TodoApp";
 
 // state를 리액트 컴포넌트의 props로 연결시켜주는 역할을 하는 함수 // ownProps는 옵션임
@@ -25,7 +30,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addTodo: (text) => {
-      dispatch(addTodoThunkActionCreator(text));
+      dispatch(addTodoActionCreator(text));
     },
     removeTodo: () => {
       dispatch(removeTodoActionCreator());

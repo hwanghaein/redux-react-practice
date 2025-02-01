@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
-// import todoReducer from "./todoReducers";
-// import todoReducer from "../ducks/todoDock";
-import todoReducer from "../actions/todoAction";
+// import todoReducer from "./todoReducer";
+// import todoReducer from '../ducks/todoDuck';
+// import todoReducer from '../actions/todoAction';
+import todoReducer from '../slices/todoSlice';
 import fetchTodosReducer from '../actions/fetchTodosAction';
 
 
